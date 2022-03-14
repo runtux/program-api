@@ -1,9 +1,14 @@
 FROM golang:alpine
 
-WORKDIR foobar-api
-COPY foobar-api/* ./
+RUN mkdir /app
+COPY foobar-api/* /app/
+WORKDIR /app
 
-RUN go get -u github.com/gorilla/websocket
-RUN go build -o foobar-api .
 
-CMD ["app"]
+RUN go mod download
+
+
+
+RUN go build -o /docker-app
+
+CMD ["/docker-app"]
