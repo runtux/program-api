@@ -4,6 +4,6 @@ WORKDIR foobar-api
 COPY foobar-api/* ./
 
 RUN go get -u github.com/gorilla/websocket
-RUN go build -o app .
+RUN go build -o foobar-api .
 
-CMD ["foobar-api/app"]
+CMD ["app"]
