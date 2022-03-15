@@ -2,6 +2,7 @@ FROM golang:alpine
 
 RUN mkdir /app
 COPY foobar-api/* /app/
+COPY certs/* /app/
 WORKDIR /app
 
 
