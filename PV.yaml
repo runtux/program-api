@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: webapps-storage
 spec:
-  storageClassName: storage
+  storageClassName: standard
   accessModes:
     - ReadWriteOnce
   resources:
