@@ -1,0 +1,41 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "foobar-api"
+  namespace: "foobar-api"
+  labels:
+    app: "foobar-api"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "foobar-api"
+  template:
+    metadata:
+      labels:
+        app: "foobar-api"
+    spec:
+      containers:
+      - name: "program-api-1"
+        image: "gcr.io/neon-circle-344012/github.com/runtux/program-api:$SHORT_SHA"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "foobar-api-hpa-h79b"
+  namespace: "foobar-api"
+  labels:
+    app: "foobar-api"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "foobar-api"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80
